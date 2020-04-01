@@ -18,7 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { DishdetailComponent } from './dishdetail/dishdetail.component';
+import { DishDetailComponent } from './dishdetail/dishdetail.component';
 
 //importing service
 import { DishService } from './services/dish.service';
@@ -31,7 +31,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
   declarations: [
     AppComponent,
     MenuComponent,
-    DishdetailComponent,
+    DishDetailComponent,
     HeaderComponent,
     FooterComponent,
     AboutComponent,
