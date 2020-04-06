@@ -73,7 +73,7 @@ export class DishService {
   //   return of(DISHES.filter((dish) => (dish.id === id))[0]).pipe(delay(2000)).toPromise();
   // }
 
-  getDish(id: number): Observable<Dish> {
+  getDish(id: string): Observable<Dish> {
     return of(DISHES.filter((dish) => (dish.id === id))[0]).pipe(delay(2000));
   }
 
@@ -85,4 +85,10 @@ export class DishService {
   getFeaturedDish(): Observable<Dish> {
     return of(DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));
   }
+
+  // add one more method
+  getDishIds(): Observable<string[] | any> {
+    return of(DISHES.map(dish => dish.id));
+  }
+
 }
