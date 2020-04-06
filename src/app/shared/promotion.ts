@@ -1,5 +1,8 @@
 export class Promotion {
-    id: string;
+    // then(arg0: (promotion: any) => any) {
+    //     throw new Error("Method not implemented.");
+    // }
+    id: number;
     name: string;
     image: string;
     label: string;

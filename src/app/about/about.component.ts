@@ -12,7 +12,14 @@ export class AboutComponent implements OnInit {
   constructor(private leaderService: LeaderService) { }
 
   ngOnInit() {
-    this.leaders = this.leaderService.getLeaders();
+    this.leaderService.getLeaders()
+      .then(leader => this.leaders = leader);
   }
+
+  // ngOnInit() {
+  //   let id = +this.route.snapshot.params['id']; // (+) converts string 'id' to a number
+  //   this.dishservice.getDish(id)
+  //     .then(dish => this.dish = dish);
+  // }
 
 }
