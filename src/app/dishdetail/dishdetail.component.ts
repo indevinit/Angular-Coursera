@@ -23,6 +23,7 @@ import { Comment } from '../shared/comment';
 export class DishDetailComponent implements OnInit {
 
   dish: Dish;
+  errMess: string;
   dishIds: string[];
   prev: string;
   next: string;
@@ -70,7 +71,8 @@ export class DishDetailComponent implements OnInit {
     this.createForm();
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
+        ermess => this.errMess = <any>ermess);
   }
 
   setPrevNext(dishId: string) {
