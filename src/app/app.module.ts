@@ -37,6 +37,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 //Mat slider
 import { MatSliderModule } from '@angular/material/slider';
 
+//Angular Http
+import { HttpClientModule } from '@angular/common/http';
+import { baseURL } from './shared/baseurl';
+import { HttpModule } from '@angular/http'
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +54,8 @@ import { MatSliderModule } from '@angular/material/slider';
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -72,12 +80,16 @@ import { MatSliderModule } from '@angular/material/slider';
     MatProgressSpinnerModule,
     MatSliderModule,
 
+    HttpClientModule,
+    HttpModule
+
 
   ],
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    { provide: 'BaseURL', useValue: baseURL }
   ],
   entryComponents: [
     LoginComponent
