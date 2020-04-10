@@ -43,7 +43,8 @@ import { MatSliderModule } from '@angular/material/slider';
 //Angular Http
 import { HttpClientModule } from '@angular/common/http';
 import { baseURL } from './shared/baseurl';
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
+import { HighlightDirective } from './directives/highlight.directive'
 
 
 
@@ -58,6 +59,7 @@ import { HttpModule } from '@angular/http'
     HomeComponent,
     ContactComponent,
     LoginComponent,
+    HighlightDirective,
 
   ],
   imports: [
