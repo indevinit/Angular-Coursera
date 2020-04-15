@@ -6,7 +6,10 @@ import { Feedback, ContactType } from '../shared/feedback';
 //validation
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { flyInOut } from '../animations/app.animation';
+import { expand, flyInOut } from '../animations/app.animation';
+// import { Dish } from '../shared/dish';
+// import { DishService } from '../services/dish.service';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -19,7 +22,8 @@ import { flyInOut } from '../animations/app.animation';
     'style': 'display: block;'
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 
@@ -29,7 +33,14 @@ export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedbackcopy: Feedback;
+
   contactType = ContactType;
+
+
+
+  errMess: string;
+
 
   formErrors = {
     'firstname': '',
@@ -37,6 +48,8 @@ export class ContactComponent implements OnInit {
     'telnum': '',
     'email': ''
   };
+  isLoading: boolean;
+  isShowingResponse: boolean;
 
   validationMessages = {
     'firstname': {
@@ -59,9 +72,16 @@ export class ContactComponent implements OnInit {
     },
   };
 
+  // isLoading: boolean;
+  // isShowingResponse: boolean;
 
-  constructor(private fb: FormBuilder) {
+
+  // constructor(private fb: FormBuilder) {
+
+  constructor(private feedbackService: FeedbackService, private fb: FormBuilder) {
     this.createForm();
+    this.isLoading = false;
+    this.isShowingResponse = false;
   }
 
   ngOnInit() {
@@ -125,19 +145,60 @@ export class ContactComponent implements OnInit {
   // }
 
   // submit on validation
+  // onSubmit() {
+
+  //   this.feedback = this.feedbackForm.value;
+  //   console.log(this.feedback);
+  //   this.feedbackForm.reset({
+  //     firstname: '',
+  //     lastname: '',
+  //     telnum: '',
+  //     email: '',
+  //     agree: false,
+  //     contacttype: 'None',
+  //     message: ''
+  //   });
+  //   this.feedbackFormDirective.resetForm();
+  // }
+
+
+  //assignment 4
   onSubmit() {
+    this.isLoading = true;
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+
+    this.feedbackService.submitFeedback(this.feedback)
+      .subscribe(feedback => {
+        this.feedback = feedback;
+        console.log(this.feedback);
+      },
+        errmess => {
+          this.feedback = null;
+          this.feedbackcopy = null;
+          this.errMess = <any>errmess;
+        },
+        () => {
+          this.isShowingResponse = true;
+          setTimeout(() => {
+            this.isShowingResponse = false;
+            this.isLoading = false;
+          }, 5000);
+        });
+
+
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
-      telnum: '',
+      telnum: 0,
       email: '',
       agree: false,
-      contacttype: 'None',
+      contactype: 'None',
       message: ''
     });
-    this.feedbackFormDirective.resetForm();
+    //this.feedbackFormDirective.resetForm();
   }
+
+
+
 
 }

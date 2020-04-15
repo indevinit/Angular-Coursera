@@ -47,7 +47,6 @@ import { HttpModule } from '@angular/http';
 import { HighlightDirective } from './directives/highlight.directive'
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +85,8 @@ import { HighlightDirective } from './directives/highlight.directive'
     MatSliderModule,
 
     HttpClientModule,
-    HttpModule
+    HttpModule,
+
 
 
   ],
